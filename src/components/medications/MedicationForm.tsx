@@ -1,16 +1,18 @@
 import { useState, type FormEvent } from 'react';
-import { useMedications } from '@/hooks/useMedications';
 
-export function MedicationForm() {
+interface MedicationFormProps {
+  onAddMedication: (name: string, dosage: string, frequency: string) => void;
+}
+
+export function MedicationForm({ onAddMedication }: MedicationFormProps) {
   const [name, setName] = useState('');
   const [dosage, setDosage] = useState('');
   const [frequency, setFrequency] = useState('');
-  const { addMedication } = useMedications();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (name.trim() && dosage.trim() && frequency.trim()) {
-      addMedication(name, dosage, frequency);
+      onAddMedication(name, dosage, frequency);
       setName('');
       setDosage('');
       setFrequency('');
