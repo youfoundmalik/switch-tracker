@@ -9,8 +9,13 @@ import { setupActivityTracking } from '@/utils/activityTracker';
 
 const INACTIVITY_TIMEOUT_MS = 300000;
 
+function getInitialUser(): string | null {
+  const session = loadCurrentUser();
+  return session?.username ?? null;
+}
+
 export function useAuth() {
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<string | null>(getInitialUser);
   const navigate = useNavigate();
   const logoutRef = useRef<() => void>();
 
@@ -21,13 +26,6 @@ export function useAuth() {
   }, [navigate]);
 
   logoutRef.current = logout;
-
-  useEffect(() => {
-    const session = loadCurrentUser();
-    if (session?.username) {
-      setUser(session.username);
-    }
-  }, []);
 
   useEffect(() => {
     if (!user) return;
