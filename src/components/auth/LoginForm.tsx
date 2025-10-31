@@ -1,16 +1,15 @@
 import { useState, type FormEvent } from 'react';
+import { useAuth } from '@/hooks/useAuth';
 
-interface LoginFormProps {
-  onLogin?: (username: string) => void;
-}
-
-export function LoginForm({ onLogin }: LoginFormProps) {
+export function LoginForm() {
   const [username, setUsername] = useState('');
+  const { login } = useAuth();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (username.trim() && onLogin) {
-      onLogin(username.trim());
+    if (username.trim()) {
+      login(username.trim());
+      setUsername('');
     }
   };
 

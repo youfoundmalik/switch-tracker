@@ -1,14 +1,8 @@
-interface LogoutButtonProps {
-  onLogout?: () => void;
-}
+import { useAuth } from '@/hooks/useAuth';
 
-export function LogoutButton({ onLogout }: LogoutButtonProps) {
-  const handleClick = () => {
-    if (onLogout) {
-      onLogout();
-    }
-  };
+export function LogoutButton() {
+  const { logout } = useAuth();
 
-  return <button onClick={handleClick}>Logout</button>;
+  return <button onClick={logout}>Logout</button>;
 }
 
