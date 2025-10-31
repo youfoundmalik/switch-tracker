@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { type VitalsEntry } from '@/types';
 import { saveVitals, loadVitals } from '@/utils/localStorage';
 import { useAuth } from '@/contexts/AuthContext';
@@ -10,23 +10,15 @@ function generateId(): string {
 export function useVitals() {
   const { user } = useAuth();
   const [vitals, setVitals] = useState<VitalsEntry[]>([]);
-  const isInitialLoad = useRef(true);
 
   useEffect(() => {
     if (user) {
       const loaded = loadVitals(user);
       setVitals(loaded);
-      isInitialLoad.current = false;
     } else {
       setVitals([]);
-      isInitialLoad.current = true;
     }
   }, [user]);
-
-  useEffect(() => {
-    if (!user || isInitialLoad.current) return;
-    saveVitals(user, vitals);
-  }, [user, vitals]);
 
   const sortedVitals = useMemo(() => {
     return [...vitals].sort((a, b) => {
@@ -36,7 +28,7 @@ export function useVitals() {
 
   const logVitals = useCallback(
     (systolic: number, diastolic: number, heartRate: number, weight: number): void => {
-      if (systolic <= 0 || diastolic <= 0 || heartRate <= 0 || weight <= 0) {
+      if (systolic <= 0 || diastolic <= 0 || heartRate <= 0 || weight <= 0 || !user) {
         return;
       }
 
@@ -49,9 +41,11 @@ export function useVitals() {
         timestamp: new Date().toISOString(),
       };
 
-      setVitals((prev) => [...prev, newVital]);
+      const updated = [...vitals, newVital];
+      setVitals(updated);
+      saveVitals(user, updated);
     },
-    []
+    [user, vitals]
   );
 
   return {
