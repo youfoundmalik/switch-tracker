@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { type Medication } from '@/types';
 import { saveMedications, loadMedications } from '@/utils/localStorage';
-import { useAuth } from './useAuth';
+import { useAuth } from '@/contexts/AuthContext';
 
 function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;

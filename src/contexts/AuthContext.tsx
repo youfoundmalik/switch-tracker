@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   saveCurrentUser,
@@ -14,7 +14,21 @@ function getInitialUser(): string | null {
   return session?.username ?? null;
 }
 
-export function useAuth() {
+interface AuthContextType {
+  user: string | null;
+  login: (username: string) => void;
+  logout: () => void;
+  isAuthenticated: boolean;
+  updateActivity: () => void;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<string | null>(getInitialUser);
   const navigate = useNavigate();
   const logoutRef = useRef<() => void>();
@@ -53,12 +67,22 @@ export function useAuth() {
     }
   }, [user]);
 
-  return {
+  const value: AuthContextType = {
     user,
     login,
     logout,
     isAuthenticated: user !== null,
     updateActivity,
   };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth(): AuthContextType {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 }
 
