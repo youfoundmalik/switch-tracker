@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { type VitalsEntry } from '@/types';
 import { saveVitals, loadVitals } from '@/utils/localStorage';
 import { useAuth } from './useAuth';
@@ -10,20 +10,22 @@ function generateId(): string {
 export function useVitals() {
   const { user } = useAuth();
   const [vitals, setVitals] = useState<VitalsEntry[]>([]);
+  const isInitialLoad = useRef(true);
 
   useEffect(() => {
     if (user) {
       const loaded = loadVitals(user);
       setVitals(loaded);
+      isInitialLoad.current = false;
     } else {
       setVitals([]);
+      isInitialLoad.current = true;
     }
   }, [user]);
 
   useEffect(() => {
-    if (user && vitals.length >= 0) {
-      saveVitals(user, vitals);
-    }
+    if (!user || isInitialLoad.current) return;
+    saveVitals(user, vitals);
   }, [user, vitals]);
 
   const sortedVitals = useMemo(() => {

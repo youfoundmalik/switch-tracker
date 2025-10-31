@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { type Medication } from '@/types';
 import { saveMedications, loadMedications } from '@/utils/localStorage';
 import { useAuth } from './useAuth';
@@ -10,20 +10,22 @@ function generateId(): string {
 export function useMedications() {
   const { user } = useAuth();
   const [medications, setMedications] = useState<Medication[]>([]);
+  const isInitialLoad = useRef(true);
 
   useEffect(() => {
     if (user) {
       const loaded = loadMedications(user);
       setMedications(loaded);
+      isInitialLoad.current = false;
     } else {
       setMedications([]);
+      isInitialLoad.current = true;
     }
   }, [user]);
 
   useEffect(() => {
-    if (user && medications.length >= 0) {
-      saveMedications(user, medications);
-    }
+    if (!user || isInitialLoad.current) return;
+    saveMedications(user, medications);
   }, [user, medications]);
 
   const addMedication = useCallback(
