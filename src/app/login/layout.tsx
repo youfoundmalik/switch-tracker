@@ -5,6 +5,10 @@ interface LoginLayoutProps {
 }
 
 export function LoginLayout({ children }: LoginLayoutProps) {
-  return <div>{children}</div>;
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      {children}
+    </div>
+  );
 }
 

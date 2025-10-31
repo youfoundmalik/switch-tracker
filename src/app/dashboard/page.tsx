@@ -12,17 +12,19 @@ export function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <section>
-        <MedicationForm onAddMedication={addMedication} />
-        <MedicationList
-          medications={medications}
-          onRemoveMedication={removeMedication}
-        />
-      </section>
-      <section>
-        <VitalsForm onLogVitals={logVitals} />
-        <VitalsLog vitals={vitals} />
-      </section>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <section>
+          <MedicationForm onAddMedication={addMedication} />
+          <MedicationList
+            medications={medications}
+            onRemoveMedication={removeMedication}
+          />
+        </section>
+        <section>
+          <VitalsForm onLogVitals={logVitals} />
+          <VitalsLog vitals={vitals} />
+        </section>
+      </div>
     </DashboardLayout>
   );
 }

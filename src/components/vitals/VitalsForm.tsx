@@ -37,58 +37,90 @@ export function VitalsForm({ onLogVitals }: VitalsFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="vital-systolic">Blood Pressure (Systolic)</label>
-        <input
-          id="vital-systolic"
-          type="number"
-          min="1"
-          value={systolic}
-          onChange={(e) => setSystolic(e.target.value)}
-          placeholder="e.g., 120"
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="vital-diastolic">Blood Pressure (Diastolic)</label>
-        <input
-          id="vital-diastolic"
-          type="number"
-          min="1"
-          value={diastolic}
-          onChange={(e) => setDiastolic(e.target.value)}
-          placeholder="e.g., 80"
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="vital-heartrate">Heart Rate (BPM)</label>
-        <input
-          id="vital-heartrate"
-          type="number"
-          min="1"
-          value={heartRate}
-          onChange={(e) => setHeartRate(e.target.value)}
-          placeholder="e.g., 65"
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="vital-weight">Weight</label>
-        <input
-          id="vital-weight"
-          type="number"
-          min="1"
-          step="0.1"
-          value={weight}
-          onChange={(e) => setWeight(e.target.value)}
-          placeholder="e.g., 150"
-          required
-        />
-      </div>
-      <button type="submit">Log Vitals</button>
-    </form>
+    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 className="text-xl font-semibold text-gray-800 mb-4">Log Vitals</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label
+            htmlFor="vital-systolic"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Blood Pressure (Systolic)
+          </label>
+          <input
+            id="vital-systolic"
+            type="number"
+            min="1"
+            value={systolic}
+            onChange={(e) => setSystolic(e.target.value)}
+            placeholder="e.g., 120"
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="vital-diastolic"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Blood Pressure (Diastolic)
+          </label>
+          <input
+            id="vital-diastolic"
+            type="number"
+            min="1"
+            value={diastolic}
+            onChange={(e) => setDiastolic(e.target.value)}
+            placeholder="e.g., 80"
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="vital-heartrate"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Heart Rate (BPM)
+          </label>
+          <input
+            id="vital-heartrate"
+            type="number"
+            min="1"
+            value={heartRate}
+            onChange={(e) => setHeartRate(e.target.value)}
+            placeholder="e.g., 65"
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="vital-weight"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Weight
+          </label>
+          <input
+            id="vital-weight"
+            type="number"
+            min="1"
+            step="0.1"
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+            placeholder="e.g., 150"
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+        >
+          Log Vitals
+        </button>
+      </form>
+    </div>
   );
 }
 

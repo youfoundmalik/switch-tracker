@@ -11,13 +11,22 @@ function formatTimestamp(timestamp: string): string {
 
 export function VitalsEntry({ entry }: VitalsEntryProps) {
   return (
-    <div>
-      <div>
-        <strong>{formatTimestamp(entry.timestamp)}</strong>
+    <div className="border border-gray-200 rounded-md p-4 hover:shadow-md transition-shadow">
+      <div className="mb-2">
+        <strong className="text-gray-800">{formatTimestamp(entry.timestamp)}</strong>
       </div>
-      <div>Blood Pressure: {entry.systolic}/{entry.diastolic}</div>
-      <div>Heart Rate: {entry.heartRate} BPM</div>
-      <div>Weight: {entry.weight}</div>
+      <div className="grid grid-cols-2 gap-2 text-sm text-gray-600">
+        <div>
+          <span className="font-medium">Blood Pressure:</span> {entry.systolic}/
+          {entry.diastolic}
+        </div>
+        <div>
+          <span className="font-medium">Heart Rate:</span> {entry.heartRate} BPM
+        </div>
+        <div>
+          <span className="font-medium">Weight:</span> {entry.weight}
+        </div>
+      </div>
     </div>
   );
 }
