@@ -14,7 +14,7 @@ export function EmptyState({ imageSrc, imageAlt, message, buttonText, onButtonCl
       <div className='gap-4 flex flex-col items-center justify-center'>
         <img src={imageSrc} alt={imageAlt} style={{ maxWidth: "75%" }} />
         <p className='text-gray-500 text-center'>{message}</p>
-        <Button variant='outline' color='secondary' onClick={onButtonClick} className='w-[250px]'>
+        <Button variant='outline' color='secondary' onClick={onButtonClick} className='min-w-[250px] max-w-[250px]'>
           {buttonText}
         </Button>
       </div>

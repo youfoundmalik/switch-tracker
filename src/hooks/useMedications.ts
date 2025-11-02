@@ -36,7 +36,7 @@ export function useMedications() {
         frequency: frequency.trim(),
       };
 
-      const updated = [...medications, newMedication];
+      const updated = [newMedication, ...medications];
       setMedications(updated);
       saveMedications(user, updated);
       setIsLoading(false);

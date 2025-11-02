@@ -158,7 +158,7 @@ Data is stored in browser localStorage with the following key structure:
 
   ```json
   {
-    "username": "sarah_j",
+    "username": "sarah.johnson",
     "lastActivity": 1234567890123
   }
   ```
