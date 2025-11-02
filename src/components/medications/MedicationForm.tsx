@@ -1,3 +1,4 @@
+import { useToast } from '@/hooks/context/useToast';
 import { Button } from "@/ui/button";
 import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
@@ -13,6 +14,7 @@ export function MedicationForm({ onAddMedication, isLoading = false, onClose }: 
   const [name, setName] = useState("");
   const [dosage, setDosage] = useState("");
   const [frequency, setFrequency] = useState("");
+  const { showToast } = useToast();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ export function MedicationForm({ onAddMedication, isLoading = false, onClose }: 
       setDosage("");
       setFrequency("");
       onClose();
+      showToast("Medication added successfully", "success", "dashboard");
     }
   };
 

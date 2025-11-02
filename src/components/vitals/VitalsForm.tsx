@@ -2,6 +2,7 @@ import { Button } from "@/ui/button";
 import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
 import { useState, type FormEvent } from "react";
+import { useToast } from "@/hooks/context/useToast";
 
 interface VitalsFormProps {
   onLogVitals: (systolic: number, diastolic: number, heartRate: number, weight: number) => Promise<void>;
@@ -14,6 +15,7 @@ export function VitalsForm({ onLogVitals, isLoading = false, onClose }: VitalsFo
   const [diastolic, setDiastolic] = useState("");
   const [heartRate, setHeartRate] = useState("");
   const [weight, setWeight] = useState("");
+  const { showToast } = useToast();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ export function VitalsForm({ onLogVitals, isLoading = false, onClose }: VitalsFo
       setHeartRate("");
       setWeight("");
       onClose();
+      showToast("Vitals logged successfully", "success", "dashboard");
     }
   };
 

@@ -100,7 +100,7 @@ export function ToastContainer({ position = "bottom", duration = 3000, scope }: 
 
   const containerClasses = {
     bottom: "absolute top-[102%] left-0 right-0 mt-2",
-    left: "fixed left-4 top-1/2 -translate-y-1/2 z-50",
+    left: "fixed right-4 top-[100px]  z-50",
   };
 
   const animationClasses = {
