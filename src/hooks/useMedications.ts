@@ -10,6 +10,8 @@ function generateId(): string {
 export function useMedications() {
   const { user } = useAuth();
   const [medications, setMedications] = useState<Medication[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [removingMedicationId, setRemovingMedicationId] = useState<string | null>(null);
 
   useEffect(() => {
     if (user) {
@@ -21,8 +23,11 @@ export function useMedications() {
   }, [user]);
 
   const addMedication = useCallback(
-    (name: string, dosage: string, frequency: string): void => {
+    async (name: string, dosage: string, frequency: string): Promise<void> => {
       if (!name.trim() || !dosage.trim() || !frequency.trim() || !user) return;
+
+      setIsLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       const newMedication: Medication = {
         id: generateId(),
@@ -34,25 +39,36 @@ export function useMedications() {
       const updated = [...medications, newMedication];
       setMedications(updated);
       saveMedications(user, updated);
+      setIsLoading(false);
     },
     [user, medications]
   );
 
   const removeMedication = useCallback(
-    (id: string): void => {
+    async (id: string): Promise<void> => {
       if (!user) return;
+
+      setRemovingMedicationId(id);
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       const updated = medications.filter((med) => med.id !== id);
       setMedications(updated);
       saveMedications(user, updated);
+      setRemovingMedicationId(null);
     },
     [user, medications]
   );
+
+  const isRemoving = useCallback((id: string): boolean => {
+    return removingMedicationId === id;
+  }, [removingMedicationId]);
 
   return {
     medications,
     addMedication,
     removeMedication,
+    isLoading,
+    isRemoving,
   };
 }
 

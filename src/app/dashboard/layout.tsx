@@ -16,7 +16,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
     <Fragment>
-      <div className='min-h-screen bg-gray-50 relative flex flex-col'>
+      <div className='h-svh bg-gray-50 relative flex flex-col'>
         <header className='bg-white shadow-md border-b border-gray-200'>
           <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
             <div className='flex justify-between items-center min-h-16 py-2.5'>
@@ -51,7 +51,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             </div>
           </div>
         </header>
-        <main className='w-full max-w-7xl mx-auto px-4 flex-1 sm:px-6 lg:px-8 py-8'>{children}</main>
+        <main className='w-full flex overflow-hidden flex-col max-w-7xl mx-auto px-4 flex-1 sm:px-6 lg:px-8 py-8'>{children}</main>
         <ToastContainer position='left' scope='dashboard' />
       </div>
 

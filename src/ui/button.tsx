@@ -28,7 +28,7 @@ export function Button({
           "bg-secondary text-primary": variant === "solid" && color === "secondary",
           "bg-red-500 text-white hover:bg-red-600": variant === "solid" && color === "danger",
           "border border-primary text-primary hover:bg-primary/10": variant === "outline" && color === "primary",
-          "border border-secondary text-primary hover:bg-secondary/10": variant === "outline" && color === "secondary",
+          "border border-secondary text-secondary hover:bg-secondary/10": variant === "outline" && color === "secondary",
           "border border-red-500 text-red-500 hover:bg-red-50": variant === "outline" && color === "danger",
         }
       )}
