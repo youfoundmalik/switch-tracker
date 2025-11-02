@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/context/useAuth";
 import { LogoutIcon } from "@/components/icons/logout";
 
 const LogoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
-  const { logout } = useAuth();
+  const { logout, isLoading } = useAuth();
 
   return (
     <ModalBase isOpen={isOpen} hideClose className='!max-w-sm' onClose={onClose}>
@@ -19,10 +19,10 @@ const LogoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           <p className='text-center text-gray-500 text-sm'>You will be redirected to the login page.</p>
         </div>
         <div className='w-full flex items-center justify-end gap-2'>
-          <Button variant='outline' className='flex-1 !border-gray-300 !text-gray-700' onClick={onClose}>
+          <Button variant='outline' disabled={isLoading} className='flex-1 !border-gray-300 !text-gray-700' onClick={onClose}>
             Cancel
           </Button>
-          <Button variant='solid' color='danger' className='flex-1' onClick={logout}>
+          <Button variant='solid' color='danger' className='flex-1' onClick={logout} loading={isLoading} loadingText='Logging out...'>
             Logout
           </Button>
         </div>
