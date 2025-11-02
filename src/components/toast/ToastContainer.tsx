@@ -11,7 +11,7 @@ interface ToastContainerProps {
 }
 
 export function ToastContainer({ position = "bottom", duration = 3000, scope }: ToastContainerProps) {
-  const { toasts, removeToast } = useToast();
+  const { toasts, removeToast, clearToastsByScope } = useToast();
 
   // Filter toasts by scope - only show toasts matching this container's scope
   const scopedToasts = scope ? toasts.filter((t) => t.scope === scope) : toasts;
@@ -81,14 +81,20 @@ export function ToastContainer({ position = "bottom", duration = 3000, scope }: 
     previousToastsRef.current = currentIds;
   }, [scopedToasts, duration, removeToast]);
 
-  // Cleanup all timeouts on unmount only
+  // Cleanup on unmount - clear timeouts and remove all toasts for this scope
   useEffect(() => {
     const timeoutsMap = timeoutRefsRef.current;
     return () => {
+      // Clear all pending timeouts
       timeoutsMap.forEach((timeout) => clearTimeout(timeout));
       timeoutsMap.clear();
+
+      // Clear all toasts for this scope when navigating away
+      if (scope) {
+        clearToastsByScope(scope);
+      }
     };
-  }, []);
+  }, [scope, clearToastsByScope]);
 
   if (scopedToasts.length === 0) return null;
 

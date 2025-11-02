@@ -6,15 +6,30 @@ export function Button({
   children,
   loading,
   loadingText,
+  variant = "gradient",
+  color,
   ...props
-}: ComponentPropsWithoutRef<"button"> & { loading?: boolean; loadingText?: string }) {
+}: ComponentPropsWithoutRef<"button"> & {
+  loading?: boolean;
+  loadingText?: string;
+  variant?: "solid" | "outline" | "gradient";
+  color?: "primary" | "secondary" | "danger";
+}) {
   return (
     <button
       className={cn(
-        "w-full bg-gradient-to-r relative overflow-clip from-primary to-secondary gap-2 font-medium text-white h-11 flex items-center justify-center py-2.5 px-4 text-[15px] rounded-md hover:opacity-90 ring-0 transition-colors",
+        "w-full relative overflow-clip from-primary transition-all to-secondary gap-2 font-medium text-white h-11 flex items-center justify-center py-2.5 px-4 text-[15px] rounded-md hover:opacity-90 ring-0",
         className,
         {
+          "border border-gray-300 text-gray-500 hover:bg-gray-50": variant === "outline",
           "opacity-50 cursor-not-allowed": props.disabled,
+          "bg-gradient-to-r from-primary to-secondary": variant === "gradient",
+          "bg-primary": variant === "solid" && color === "primary",
+          "bg-secondary text-primary": variant === "solid" && color === "secondary",
+          "bg-red-500 text-white hover:bg-red-600": variant === "solid" && color === "danger",
+          "border border-primary text-primary hover:bg-primary/10": variant === "outline" && color === "primary",
+          "border border-secondary text-primary hover:bg-secondary/10": variant === "outline" && color === "secondary",
+          "border border-red-500 text-red-500 hover:bg-red-50": variant === "outline" && color === "danger",
         }
       )}
       {...props}

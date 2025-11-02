@@ -20,10 +20,15 @@ export function ToastProvider({ children }: ToastProviderProps) {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   }, []);
 
+  const clearToastsByScope = useCallback((scope: string) => {
+    setToasts((prev) => prev.filter((toast) => toast.scope !== scope));
+  }, []);
+
   const value = {
     toasts,
     showToast,
     removeToast,
+    clearToastsByScope,
   };
 
   return <ToastContext.Provider value={value}>{children}</ToastContext.Provider>;
