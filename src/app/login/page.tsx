@@ -3,7 +3,7 @@ import { LoginForm } from '@/components/auth/LoginForm';
 
 export function LoginPage() {
   return (
-    <LoginLayout>
+    <LoginLayout title='Welcome back!'>
       <LoginForm />
     </LoginLayout>
   );

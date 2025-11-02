@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { type VitalsEntry } from '@/types';
 import { saveVitals, loadVitals } from '@/utils/localStorage';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/hooks/context/useAuth';
 
 function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;

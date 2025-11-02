@@ -10,6 +10,9 @@ export default {
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',
       },
+      fontFamily: {
+        sans: ['Open Sans', 'sans-serif'],
+      },
     },
   },
   plugins: [],

@@ -19,3 +19,14 @@ export interface UserSession {
   lastActivity: number;
 }
 
+export interface User {
+  email: string;
+  name: string;
+  username: string;
+  dp: string; // profile picture URL
+  dob: string; // date of birth (ISO string)
+  age: number;
+  gender: string;
+  bloodType: string;
+  genotype: string;
+}
