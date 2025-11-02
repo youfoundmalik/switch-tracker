@@ -11,7 +11,7 @@ import { Button } from "@/ui/button";
 export function DashboardPage() {
   const [isLogVitalsOpen, setIsLogVitalsOpen] = useState(false);
   const [isAddMedicationOpen, setIsAddMedicationOpen] = useState(false);
-  const { medications, removeMedication, addMedication, isLoading: medicationsLoading, isRemoving } = useMedications();
+  const { medications, removeMedication, addMedication, isLoading: medicationsLoading, removingMedicationId } = useMedications();
   const { vitals, logVitals, isLoading: vitalsLoading } = useVitals();
 
   return (
@@ -29,7 +29,7 @@ export function DashboardPage() {
             medications={medications}
             onRemoveMedication={removeMedication}
             onAddMedication={() => setIsAddMedicationOpen(true)}
-            isRemoving={isRemoving}
+            removingMedicationId={removingMedicationId}
           />
         </section>
         <section className='flex-1 w-full flex flex-col items-end gap-2 overflow-y-hidden'>

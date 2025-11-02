@@ -6,7 +6,7 @@ export interface AuthContextType {
   login: (username: string) => Promise<boolean>;
   logout: () => Promise<void>;
   isAuthenticated: boolean;
-  updateActivity: () => Promise<void>;
+  updateActivity: () => void;
   loginError: string | null;
   isRedirecting: boolean;
   setLoginError: Dispatch<SetStateAction<string | null>>;

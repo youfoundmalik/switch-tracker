@@ -59,16 +59,12 @@ export function useMedications() {
     [user, medications]
   );
 
-  const isRemoving = useCallback((id: string): boolean => {
-    return removingMedicationId === id;
-  }, [removingMedicationId]);
-
   return {
     medications,
     addMedication,
     removeMedication,
     isLoading,
-    isRemoving,
+    removingMedicationId,
   };
 }
 

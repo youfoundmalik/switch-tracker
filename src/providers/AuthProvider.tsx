@@ -101,9 +101,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     [navigate, setActiveUser, showToast]
   );
 
-  const updateActivity = useCallback(async (): Promise<void> => {
+  const updateActivity = useCallback((): void => {
     if (user) {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
       saveCurrentUser(user);
     }
   }, [user]);

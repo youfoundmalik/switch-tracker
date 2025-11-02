@@ -1,6 +1,6 @@
 import { type VitalsEntry } from "@/types";
 import { VitalsEntry as VitalsEntryComponent } from "./VitalsEntry";
-import { Button } from "@/ui/button";
+import { EmptyState } from "@/components/shared/EmptyState";
 
 interface VitalsLogProps {
   vitals: VitalsEntry[];
@@ -10,15 +10,13 @@ interface VitalsLogProps {
 export function VitalsLog({ vitals, onAddVitals }: VitalsLogProps) {
   if (vitals.length === 0) {
     return (
-      <div className='bg-white rounded-lg shadow w-full p-6 flex-1 flex items-center justify-center'>
-        <div className='gap-4 flex flex-col items-center justify-center'>
-          <img src='/vitals.svg' alt='No vitals logged yet' style={{ maxWidth: "75%" }} />
-          <p className='text-gray-500 text-center'>No vitals logged yet.</p>
-          <Button variant='outline' color='secondary' onClick={onAddVitals} className='max-w-[250px]'>
-            Add Vitals
-          </Button>
-        </div>
-      </div>
+      <EmptyState
+        imageSrc='/src/assets/vitals.svg'
+        imageAlt='No vitals logged yet'
+        message='No vitals logged yet.'
+        buttonText='Add Vitals'
+        onButtonClick={onAddVitals}
+      />
     );
   }
 

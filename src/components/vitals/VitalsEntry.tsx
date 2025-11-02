@@ -6,11 +6,14 @@ interface VitalsEntryProps {
 }
 
 export function VitalsEntry({ entry }: VitalsEntryProps) {
+  const formattedTimestamp = formatTimestamp(entry.timestamp);
+  const [date, time] = formattedTimestamp ? formattedTimestamp.split(" - ") : ["", ""];
+
   return (
     <div className='border border-gray-200 odd:bg-gray-50 even:bg-white rounded-md p-4 hover:shadow-md transition-shadow'>
       <div className='mb-2 flex justify-between items-center'>
-        <strong className='text-gray-800'>{formatTimestamp(entry.timestamp)?.split(" - ")[0]}</strong>
-        <strong className='text-gray-800'>{formatTimestamp(entry.timestamp)?.split(" - ")[1]}</strong>
+        <strong className='text-gray-800'>{date}</strong>
+        <strong className='text-gray-800'>{time}</strong>
       </div>
       <div className='grid grid-cols-2 gap-2 text-sm text-gray-600'>
         <div>

@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { MedicationForm } from "../medications/MedicationForm";
 import ModalBase from ".";
 
@@ -11,11 +10,9 @@ interface AddMedicationModalProps {
 
 const AddMedicationModal = ({ isOpen, onClose, addMedication, isLoading }: AddMedicationModalProps) => {
   return (
-    <Fragment>
-      <ModalBase header='Add Medication' isOpen={isOpen} className='!max-w-md' onClose={onClose}>
-        <MedicationForm onClose={onClose} onAddMedication={addMedication} isLoading={isLoading} />
-      </ModalBase>
-    </Fragment>
+    <ModalBase header='Add Medication' isOpen={isOpen} className='!max-w-md' onClose={onClose}>
+      <MedicationForm onClose={onClose} onAddMedication={addMedication} isLoading={isLoading} />
+    </ModalBase>
   );
 };
 

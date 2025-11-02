@@ -10,7 +10,7 @@ interface LoginLayoutProps {
 export function LoginLayout({ children, title }: LoginLayoutProps) {
   return (
     <div className='min-h-screen w-screen flex flex-col items-center justify-center  px-4 relative'>
-      <img src='/auth-bg.jpeg' alt='Switch - Health Tracker' className='absolute top-0 left-0 w-full h-full object-cover object-right-bottom' />
+      <img src='/src/assets/auth-bg.jpeg' alt='' className='absolute top-0 left-0 w-full h-full object-cover object-right-bottom' />
       <div className='w-full max-w-md relative z-10 h-full flex flex-col items-center justify-center gap-4'>
         <Logo className='w-44' />
         <div className='bg-white border border-gray-100 rounded-lg shadow-md p-8 w-full relative'>

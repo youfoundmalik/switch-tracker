@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { VitalsForm } from "../vitals/VitalsForm";
 import ModalBase from ".";
 
@@ -11,11 +10,9 @@ interface LogVitalsModalProps {
 
 const LogVitalsModal = ({ isOpen, onClose, logVitals, isLoading }: LogVitalsModalProps) => {
   return (
-    <Fragment>
-      <ModalBase header='Log Vitals' isOpen={isOpen} className='!max-w-md' onClose={onClose}>
-        <VitalsForm onClose={onClose} onLogVitals={logVitals} isLoading={isLoading} />
-      </ModalBase>
-    </Fragment>
+    <ModalBase header='Log Vitals' isOpen={isOpen} className='!max-w-md' onClose={onClose}>
+      <VitalsForm onClose={onClose} onLogVitals={logVitals} isLoading={isLoading} />
+    </ModalBase>
   );
 };
 

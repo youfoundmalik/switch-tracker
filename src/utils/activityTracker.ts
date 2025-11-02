@@ -3,6 +3,8 @@ export function setupActivityTracking(
   timeoutMs: number = 300000
 ): () => void {
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
+  let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  const DEBOUNCE_DELAY = 300; // Debounce activity tracking by 300ms
 
   function resetTimer(): void {
     if (timeoutId) {
@@ -14,7 +16,13 @@ export function setupActivityTracking(
   }
 
   function handleActivity(): void {
-    resetTimer();
+    // Debounce rapid activity events
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+    }
+    debounceTimer = setTimeout(() => {
+      resetTimer();
+    }, DEBOUNCE_DELAY);
   }
 
   resetTimer();
@@ -28,6 +36,9 @@ export function setupActivityTracking(
   return () => {
     if (timeoutId) {
       clearTimeout(timeoutId);
+    }
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
     }
     window.removeEventListener('mousemove', handleActivity);
     window.removeEventListener('keypress', handleActivity);
